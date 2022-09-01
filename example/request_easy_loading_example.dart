@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             ),
             ElevatedButton(
               onPressed: (){
-                Timer.periodic(Duration(seconds: 10), (timer) {
+                Timer.periodic(Duration(seconds: 1), (timer) {
                   RequestEasyLoading().showProgressDialog(sent, 100);
                   if(sent == 100){
                     timer.cancel();
