@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class RequestEasyLoading {
-  late GlobalKey<NavigatorState> navigatorKey;
+  late GlobalKey<NavigatorState> _navigatorKey;
   int _count = 0;
-  BuildContext? context;
-  bool showProgress = false;
-  GlobalKey<ProgressDialogState> progressKey = GlobalKey<ProgressDialogState>();
+  BuildContext? _context;
+  bool _showProgress = false;
+  GlobalKey<ProgressDialogState> _progressKey = GlobalKey<ProgressDialogState>();
 
   static final RequestEasyLoading _singleton = RequestEasyLoading._internal();
 
@@ -18,7 +18,7 @@ class RequestEasyLoading {
   RequestEasyLoading._internal();
 
   setNavigatorKey(GlobalKey<NavigatorState> navKey){
-    navigatorKey = navKey;
+    _navigatorKey = navKey;
   }
 
   Future<void> showEasyLoading() async {
@@ -49,9 +49,9 @@ class RequestEasyLoading {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       showDialog(
         barrierColor: Colors.transparent,
-        context: navigatorKey.currentState!.context,
+        context: _navigatorKey.currentState!.context,
         builder: (context) {
-          this.context = context;
+          _context = context;
           return const LoadingDialog();
         },
       );
@@ -59,23 +59,23 @@ class RequestEasyLoading {
   }
 
   _cancelLoading() {
-    Navigator.pop(context!);
+    Navigator.pop(_context!);
   }
 
   showProgressDialog(int sent, int total) {
-    if(showProgress){
-      if(progressKey.currentState != null){
+    if(_showProgress){
+      if(_progressKey.currentState != null){
         if(sent >= total){
-          Navigator.pop(navigatorKey.currentState!.context);
+          Navigator.pop(_navigatorKey.currentState!.context);
         }
-        progressKey.currentState!.updateProgress(min((sent/total),1));
+        _progressKey.currentState!.updateProgress(min((sent/total),1));
       }
     }else{
-      showProgress = true;
-      progressKey = GlobalKey<ProgressDialogState>();
-      showDialog(context: navigatorKey.currentState!.context, builder: (context){
-        return ProgressDialog(key: progressKey);
-      }).then((value) => showProgress = false);
+      _showProgress = true;
+      _progressKey = GlobalKey<ProgressDialogState>();
+      showDialog(context: _navigatorKey.currentState!.context, builder: (context){
+        return ProgressDialog(key: _progressKey);
+      }).then((value) => _showProgress = false);
     }
   }
 }
