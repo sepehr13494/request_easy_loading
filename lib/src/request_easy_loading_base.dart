@@ -7,7 +7,8 @@ class RequestEasyLoading {
   int _count = 0;
   BuildContext? _context;
   bool _showProgress = false;
-  GlobalKey<ProgressDialogState> _progressKey = GlobalKey<ProgressDialogState>();
+  GlobalKey<ProgressDialogState> _progressKey =
+      GlobalKey<ProgressDialogState>();
 
   static final RequestEasyLoading _singleton = RequestEasyLoading._internal();
 
@@ -17,7 +18,7 @@ class RequestEasyLoading {
 
   RequestEasyLoading._internal();
 
-  setNavigatorKey(GlobalKey<NavigatorState> navKey){
+  setNavigatorKey(GlobalKey<NavigatorState> navKey) {
     _navigatorKey = navKey;
   }
 
@@ -63,19 +64,21 @@ class RequestEasyLoading {
   }
 
   showProgressDialog(int sent, int total) {
-    if(_showProgress){
-      if(_progressKey.currentState != null){
-        if(sent >= total){
+    if (_showProgress) {
+      if (_progressKey.currentState != null) {
+        if (sent >= total) {
           Navigator.pop(_navigatorKey.currentState!.context);
         }
-        _progressKey.currentState!.updateProgress(min((sent/total),1));
+        _progressKey.currentState!.updateProgress(min((sent / total), 1));
       }
-    }else{
+    } else {
       _showProgress = true;
       _progressKey = GlobalKey<ProgressDialogState>();
-      showDialog(context: _navigatorKey.currentState!.context, builder: (context){
-        return ProgressDialog(key: _progressKey);
-      }).then((value) => _showProgress = false);
+      showDialog(
+          context: _navigatorKey.currentState!.context,
+          builder: (context) {
+            return ProgressDialog(key: _progressKey);
+          }).then((value) => _showProgress = false);
     }
   }
 }
@@ -88,7 +91,6 @@ class ProgressDialog extends StatefulWidget {
 }
 
 class ProgressDialogState extends State<ProgressDialog> {
-
   double _value = 0;
 
   void updateProgress(double value) {
@@ -99,10 +101,11 @@ class ProgressDialogState extends State<ProgressDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return LoadingDialog(value: _value,);
+    return LoadingDialog(
+      value: _value,
+    );
   }
 }
-
 
 class LoadingDialog extends StatelessWidget {
   final double? value;
@@ -115,10 +118,7 @@ class LoadingDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: EdgeInsets.all(MediaQuery
-          .of(context)
-          .size
-          .width - 56) / 2,
+      insetPadding: EdgeInsets.all(MediaQuery.of(context).size.width - 56) / 2,
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.7),

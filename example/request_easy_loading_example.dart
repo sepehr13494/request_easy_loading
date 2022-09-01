@@ -30,7 +30,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   Timer? timer;
   int sent = 0;
 
@@ -44,29 +43,34 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: (){
+              onPressed: () {
                 RequestEasyLoading().showEasyLoading();
-                Future.delayed(Duration(seconds: 2),(){
+                Future.delayed(Duration(seconds: 2), () {
                   RequestEasyLoading().cancelEasyLoading();
                 });
               },
               child: Text("Show Loading"),
             ),
             ElevatedButton(
-              onPressed: (){
+              onPressed: () {
                 Timer.periodic(Duration(seconds: 1), (timer) {
                   RequestEasyLoading().showProgressDialog(sent, 100);
-                  if(sent == 100){
+                  if (sent == 100) {
                     timer.cancel();
                     sent = 0;
-                  }else{
-                    sent +=20;
+                  } else {
+                    sent += 20;
                   }
                 });
               },
               child: Text("Show Progress Loading"),
             ),
-          ].map((e) => Padding(padding: EdgeInsets.symmetric(vertical: 16),child: e,)).toList(),
+          ]
+              .map((e) => Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: e,
+                  ))
+              .toList(),
         ),
       ),
     );
@@ -74,10 +78,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    if(timer != null){
+    if (timer != null) {
       timer!.cancel();
     }
     super.dispose();
   }
 }
-
