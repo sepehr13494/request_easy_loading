@@ -1,4 +1,4 @@
-# Boilerplate Project
+# Request Easy Loading
 
 The request_easy_loading package helps you to show loading or progress dialog while sending request to server and it doesn't need context for doing that
 

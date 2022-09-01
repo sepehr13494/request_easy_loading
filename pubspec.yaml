@@ -1,6 +1,6 @@
 name: request_easy_loading
 description: This package helps you to show loading or progress dialog while sending request to server and it doesn't need context for doing that
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/sepehr13494/request_easy_loading
 
 environment:
