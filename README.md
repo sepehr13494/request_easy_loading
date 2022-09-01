@@ -13,7 +13,7 @@ The request_easy_loading contains the minimal implementation required to create 
 Download or clone this repo by using the link below:
 
 ```
-https://github.com/zubairehman/flutter-boilerplate-project.git
+https://github.com/sepehr13494/request_easy_loading
 ```
 
 **Step 2:**
