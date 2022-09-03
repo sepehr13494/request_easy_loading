@@ -117,17 +117,21 @@ class LoadingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      insetPadding: EdgeInsets.all(MediaQuery.of(context).size.width - 56) / 2,
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.7),
-            borderRadius: BorderRadius.circular(12)),
-        height: 56,
-        width: 56,
-        padding: const EdgeInsets.all(8.0),
-        child: CircularProgressIndicator(value: value),
-      ),
+    return LayoutBuilder(
+      builder: (context,snap) {
+        return Dialog(
+          insetPadding: EdgeInsets.all(snap.maxWidth - 56) / 2,
+          child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.7),
+                borderRadius: BorderRadius.circular(12)),
+            height: 56,
+            width: 56,
+            padding: const EdgeInsets.all(8.0),
+            child: CircularProgressIndicator(value: value),
+          ),
+        );
+      }
     );
   }
 }
